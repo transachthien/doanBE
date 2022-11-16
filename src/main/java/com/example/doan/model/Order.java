@@ -29,4 +29,8 @@ public class Order {
     private String orderDetail;
     @Field(name = "created_at")
     private Date createdAt;
+    @Field(name = "email")
+    private String email;
+    @Field(name = "card_number")
+    private String cardNumber;
 }
