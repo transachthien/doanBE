@@ -6,10 +6,7 @@ import com.example.doan.service.RSAUtil;
 import com.example.doan.service.SequenceGeneratorService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -28,6 +25,10 @@ public class OrderController {
     private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private RSAUtil rsaUtil;
+    @GetMapping("/tesst")
+    public String test(){
+     return"l;sd;lk;lkl;";
+    }
     @PostMapping
     public String save(@RequestBody Order order) throws InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, NoSuchPaddingException{
         order.setId(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME));
