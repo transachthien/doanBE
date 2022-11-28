@@ -12,6 +12,7 @@
 	<artifactId>doan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>doan</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -62,6 +63,20 @@
 						</exclude>
 					</excludes>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<executable>true</executable>
+							<classifier>spring-boot</classifier>
+							<mainClass>
+								[groupId.artifactId].Application
+							</mainClass>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
