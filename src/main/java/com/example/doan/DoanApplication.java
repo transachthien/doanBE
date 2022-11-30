@@ -31,28 +31,28 @@ public class DoanApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		try {
-			File file = new File("C:\\Users\\Administrator\\Downloads\\data.csv");
-			FileReader fr = new FileReader(file, StandardCharsets.UTF_8);
-			BufferedReader br = new BufferedReader(fr);
-			String line = "";
-			String[] tempArr;
-			while((line = br.readLine()) != null) {
-				tempArr = line.split(",");
-				if(tempArr.length >1 && !tempArr[0].equals("name")){
-
-					Product product = new Product();
-					product.setId(service.getSequenceNumber(SEQUENCE_NAME));
-					product.setName(tempArr[0]);
-					product.setPrice(Integer.parseInt(tempArr[1]));
-					product.setImg(tempArr[2]);
-					productRepository.save(product);
-				}
-			}
-			br.close();
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
-		}
+//		try {
+//			File file = new File("C:\\Users\\Administrator\\Downloads\\data.csv");
+//			FileReader fr = new FileReader(file, StandardCharsets.UTF_8);
+//			BufferedReader br = new BufferedReader(fr);
+//			String line = "";
+//			String[] tempArr;
+//			while((line = br.readLine()) != null) {
+//				tempArr = line.split(",");
+//				if(tempArr.length >1 && !tempArr[0].equals("name")){
+//
+//					Product product = new Product();
+//					product.setId(service.getSequenceNumber(SEQUENCE_NAME));
+//					product.setName(tempArr[0]);
+//					product.setPrice(Integer.parseInt(tempArr[1]));
+//					product.setImg(tempArr[2]);
+//					productRepository.save(product);
+//				}
+//			}
+//			br.close();
+//		} catch(IOException ioe) {
+//			ioe.printStackTrace();
+//		}
 
 
 	}
