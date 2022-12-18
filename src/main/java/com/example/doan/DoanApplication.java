@@ -32,7 +32,7 @@ public class DoanApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //		try {
-//			File file = new File("C:\\Users\\Administrator\\Downloads\\data.csv");
+//			File file = new File("D:\\DoAnTotNghiep\\crawl_data\\data.csv");
 //			FileReader fr = new FileReader(file, StandardCharsets.UTF_8);
 //			BufferedReader br = new BufferedReader(fr);
 //			String line = "";
@@ -46,6 +46,7 @@ public class DoanApplication implements CommandLineRunner {
 //					product.setName(tempArr[0]);
 //					product.setPrice(Integer.parseInt(tempArr[1]));
 //					product.setImg(tempArr[2]);
+//					product.setCategory("cake");
 //					productRepository.save(product);
 //				}
 //			}

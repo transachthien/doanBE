@@ -1,18 +1,19 @@
 package com.example.doan.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
-@Getter
-@Setter
+import java.util.ArrayList;
+import java.util.Collection;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Component
 public class User {
-    private Integer id;
-    private String username;
-    private String password;
-    private String fullName;
-    private String idCardNumber;
-    private String idCardType;
-    private String address;
-    private String description;
+    public  long id;
+    public  String name;
+    public String username;
+    public  String password;
+    private Collection<Role> roles = new ArrayList<>();
 }
