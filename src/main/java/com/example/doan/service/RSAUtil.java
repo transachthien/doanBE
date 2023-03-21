@@ -31,7 +31,6 @@ public class RSAUtil {
         }
         return publicKey;
     }
-
     public static PrivateKey getPrivateKey(String base64PrivateKey){
         PrivateKey privateKey = null;
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(base64PrivateKey.getBytes()));

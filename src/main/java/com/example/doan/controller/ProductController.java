@@ -33,7 +33,7 @@ public class ProductController {
     @PostMapping("/addProduct")
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
         Product newEmployee = productService.addProduct(product);
-        return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
+        return new ResponseEntity<>(newEmployee, HttpStatus.OK);
     }
     @GetMapping("/all")
     public ResponseEntity<List<Product>> getAllProduct(){
