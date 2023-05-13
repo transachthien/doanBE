@@ -21,8 +21,7 @@ public class LogWork {
     public LogWork() {
 
     }
-    public LogWork(long id, long employeeID, Long logWorkTime) {
-        this.id = id;
+    public LogWork(long employeeID, Long logWorkTime) {
         this.employeeID = employeeID;
         this.logWorkTime = logWorkTime;
     }

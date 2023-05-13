@@ -20,8 +20,7 @@ public class Employee {
     @Column(name = "departmentID")
     private long departmentID;
 
-    public Employee(long id, String name, String address, long departmentID) {
-        this.id = id;
+    public Employee(String name, String address, long departmentID) {
         this.name = name;
         this.address = address;
         this.departmentID = departmentID;
