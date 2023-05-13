@@ -19,8 +19,7 @@ public class Department {
     public Department() {
 
     }
-    public Department(long id, String departmentName) {
-        this.id = id;
+    public Department( String departmentName) {
         this.departmentName = departmentName;
     }
 }
