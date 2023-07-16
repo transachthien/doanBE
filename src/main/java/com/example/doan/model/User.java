@@ -1,19 +1,25 @@
 package com.example.doan.model;
 
-import lombok.*;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
+@Document(collection = "Users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class User {
-    public  long id;
+    @MongoId(FieldType.OBJECT_ID)
+    public  String id;
     public  String name;
     public String username;
     public  String password;
-    private Collection<Role> roles = new ArrayList<>();
+    private List<Role> roles;
+
+
 }
