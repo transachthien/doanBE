@@ -1,10 +1,11 @@
 package com.example.doan.repository;
 import com.example.doan.model.User;
 
-import java.util.List;
-//extends JpaRepository<User, Long>
-public interface UserRepo {
-    User findByUsername(final String username);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-    List<User> findAll();
+@Repository
+public interface UserRepo extends MongoRepository<User, String> {
+    User findByUsername(final String username);
 }

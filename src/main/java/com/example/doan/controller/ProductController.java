@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +26,10 @@ public class ProductController {
 
     @GetMapping("/getAllProduct")
     public List<Product> getAllProduct(@RequestParam(defaultValue ="", required = false) String name ,
-                                       @RequestParam(defaultValue ="", required = false) String category){
-        return productRepository.findAllProduct(name, category);
+                                       @RequestParam(defaultValue ="", required = false) String category,
+                                       @RequestParam(defaultValue ="1", required = false) int page){
+        Pageable paging = PageRequest.of(page, 6);
+        return productRepository.findAllProduct(name, category, paging);
     }
     @GetMapping("/getProductDetail")
     public Optional<Product> getProductDetail(@RequestParam int id){
