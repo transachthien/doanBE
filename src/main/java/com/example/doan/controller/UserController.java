@@ -46,7 +46,21 @@ public class UserController {
         userService.addRoleUSer(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
-}
+    @PostMapping("/user/update")
+    public ResponseEntity<?>updateUser(@RequestBody User user){
+        User getUser = userService.getUsers(user.username);
+        getUser.setListKeyWord(user.getListKeyWord());
+        getUser.setListNewSave(user.getListNewSave());
+        userService.saveUser(getUser);
+        return ResponseEntity.ok().body(getUser);
+    }
+    @GetMapping ("/user/get")
+    public ResponseEntity<User> getUserByUsername(@RequestParam("username") String username){
+        User getUser = userService.getUsers(username);
+        return ResponseEntity.ok().body(getUser);
+    }
+
+        }
 @Data
 class RoleToUserFrom{
     private String username;
