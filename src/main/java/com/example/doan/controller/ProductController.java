@@ -1,5 +1,6 @@
 package com.example.doan.controller;
 
+import com.example.doan.model.FormSeachListNew;
 import com.example.doan.model.FormSearch;
 import com.example.doan.model.Product;
 import com.example.doan.repository.ProductCustomRepository;
@@ -50,7 +51,8 @@ public class ProductController {
 //    }
     @PostMapping("/addProduct")
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
-        Product newEmployee = productService.addProduct(product);
+        Product newEmployee = new Product();
+//                productService.addProduct(product);
         return new ResponseEntity<>(newEmployee, HttpStatus.OK);
     }
     @GetMapping("/all")
@@ -88,6 +90,17 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable("id") Integer id){
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/findListNewSave")
+    public ResponseEntity<List<Product>> getProduct(@RequestBody FormSeachListNew formSearch) {
+//        List<String> keyword = new ArrayList<>();
+//        if(formSearch.getName().length>0){
+//            for(var key: formSearch.getName()){
+//                keyword.add(productService.convertStringToId(key));
+//            }
+//        }
+        var count = productService.findAllProductSave(formSearch.getName());
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
 

@@ -15,6 +15,8 @@ public interface ProductRepository extends MongoRepository<Product, ObjectId> {
     void deleteEmployeeById(Integer id);
     long countProductByClusteringIsLike(String name);
     long countProductByKeywordIsInAndKind(List<String> keyword, String kind);
+//    @Query(value = "{ $and:[{'_id': { $in: ?0}}]}")
+    List<Product> findByIdIn(List<ObjectId> ids);
 
     Optional<Product> findEmployeeById(Integer id);
 }
