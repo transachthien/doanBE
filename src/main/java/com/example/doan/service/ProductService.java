@@ -2,10 +2,12 @@ package com.example.doan.service;
 
 import com.example.doan.model.Product;
 import com.example.doan.repository.ProductRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.doan.model.Product.SEQUENCE_NAME;
@@ -70,11 +72,11 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    public Product addProduct(Product product){
-        product.setId(service.getSequenceNumber(SEQUENCE_NAME));
-
-        return productRepository.save(product);
-    }
+//    public Product addProduct(Product product){
+//        product.setId(service.getSequenceNumber(SEQUENCE_NAME));
+//
+//        return productRepository.save(product);
+//    }
     public List<Product> findAllProduct(){
         return productRepository.findAll();
     }
@@ -95,6 +97,14 @@ public class ProductService {
         return result;
 
     }
+    public List<Product> findAllProductSave(List<String> ids){
+        List<ObjectId> listId = new ArrayList<>();
+        for(var x:ids){
+            listId.add(new ObjectId(x));
+        }
+        return productRepository.findByIdIn(listId);
+    }
+
     @Transactional
     public void deleteProduct(Integer id){
         productRepository.deleteEmployeeById(id);

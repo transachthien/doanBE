@@ -17,7 +17,7 @@ public class Product {
     @Transient
     public static final String SEQUENCE_NAME = "product_sequence";
     @MongoId(FieldType.OBJECT_ID)
-    private String _id;
+    private String id;
     private String name;
     private int price;
     private String img;
@@ -34,6 +34,5 @@ public class Product {
     private String clustering;
     private String predict;
     private String kind;
-    private int id;
 
 }
