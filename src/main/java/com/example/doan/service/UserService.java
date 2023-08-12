@@ -7,6 +7,7 @@ import java.util.List;
 @Service
 public interface UserService {
     User saveUser(User user);
+    User updateUser(User user);
     Role saveRole(Role role);
     void addRoleUSer(String username, String roleName);
     User getUsers(String username);

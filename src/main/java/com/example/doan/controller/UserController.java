@@ -51,7 +51,7 @@ public class UserController {
         User getUser = userService.getUsers(user.username);
         getUser.setListKeyWord(user.getListKeyWord());
         getUser.setListNewSave(user.getListNewSave());
-        userService.saveUser(getUser);
+        userService.updateUser(getUser);
         return ResponseEntity.ok().body(getUser);
     }
     @GetMapping ("/user/get")
