@@ -12,18 +12,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductCustomRepository {
     private final MongoTemplate mongoTemplate;
-    public List<Product> findByCustomQuery(List<String> keywords, String categoryRegex) {
+    public long findByCustomQuery(List<String> keywords, String categoryRegex, String predict) {
         // Your native MongoDB query
 //        String query = "{$and: [{'key_word': {$in: ?0}}, {'category': {$regex: ?1, $options: 'i'}}]}";
         Criteria criteria = new Criteria()
                 .andOperator(
                         Criteria.where("key_word").in(keywords),
-                        Criteria.where("category").regex(categoryRegex, "i")
+                        Criteria.where("kind").regex(categoryRegex, "i")
+//                        , Criteria.where("predict").regex(predict, "i")
                 );
 
         // Create the Query with the given Criteria
         Query query = new Query(criteria);
 
-        return mongoTemplate.find(query, Product.class);
+        return mongoTemplate.count(query, Product.class);
     }
 }

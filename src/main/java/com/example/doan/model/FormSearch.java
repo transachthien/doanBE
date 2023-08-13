@@ -7,4 +7,5 @@ import java.util.List;
 public class FormSearch {
     private String[] name;
     private String category;
+    private String kindCluster;
 }

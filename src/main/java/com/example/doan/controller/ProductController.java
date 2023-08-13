@@ -38,12 +38,34 @@ public class ProductController {
                                        @RequestParam(defaultValue ="1", required = false) int page){
         Pageable paging = PageRequest.of(page, 6);
         List<String> keyword = new ArrayList<>();
+//        String predict ="";
         if(formSearch.getName().length>0){
             for(var key: formSearch.getName()){
                 keyword.add(productService.convertStringToId(key));
             }
         }
-         return productRepository.findAllProduct(keyword, category, paging);
+//        if(formSearch.getKindCluster().equals("0")){
+//
+//        }else if(formSearch.getKindCluster().equals("1")){
+//            predict = "POS";
+//
+//        }else if(formSearch.getKindCluster().equals("2")){
+//            predict = "NEG";
+//        }
+        List<String> predict = new ArrayList<>();
+        if(formSearch.getKindCluster().equals("0")){
+            predict.add("POS");
+            predict.add("NEG");
+
+        }else if(formSearch.getKindCluster().equals("1")){
+            predict.add("POS");
+//            predict = "POS";
+
+        }else if(formSearch.getKindCluster().equals("2")){
+            predict.add("NEG");
+//            predict = "NEG";
+        }
+         return productRepository.findAllProduct(keyword, category,predict, paging);
     }
 //    @GetMapping("/getProductDetail")
 //    public Optional<Product> getProductDetail(@RequestParam int id){
@@ -73,7 +95,22 @@ public class ProductController {
                 keyword.add(productService.convertStringToId(key));
             }
         }
-        var count = productRepository.countProductByKeywordIsInAndKind(keyword, formSearch.getCategory());
+//        List<String> predict = new ArrayList<>();
+        String predict ="";
+        if(formSearch.getKindCluster().equals("0")){
+//            predict.add("POS");
+//            predict.add("NEG");
+
+        }else if(formSearch.getKindCluster().equals("1")){
+//            predict.add("POS");
+            predict = "POS";
+
+        }else if(formSearch.getKindCluster().equals("2")){
+//            predict.add("NEG");
+            predict = "NEG";
+        }
+//        var count = productRepository.countProductByKeywordIsInAndKindAndAndPredictIsIn(keyword, formSearch.getCategory(), predict);
+        var count = productCustomRepository.findByCustomQuery(keyword, formSearch.getCategory(), predict);
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 //    @PostMapping("/add")
