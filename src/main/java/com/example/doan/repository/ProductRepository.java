@@ -20,6 +20,8 @@ public interface ProductRepository extends MongoRepository<Product, ObjectId>{
     long countProductByKeywordIsInAndKindAndAndPredictIsIn(List<String> keyword, String kind, List<String> predict);
 //    @Query(value = "{ $and:[{'_id': { $in: ?0}}]}")
     List<Product> findByIdIn(List<ObjectId> ids);
+    long countProductByKeywordAndKind(String keyWord, String kind);
+    long countProductByClustering(String cluster);
 
     Optional<Product> findEmployeeById(Integer id);
 }
