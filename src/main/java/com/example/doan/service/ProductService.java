@@ -1,6 +1,7 @@
 package com.example.doan.service;
 
 import com.example.doan.model.Product;
+import com.example.doan.model.ResponseKeyWord;
 import com.example.doan.repository.ProductRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.doan.model.Product.SEQUENCE_NAME;
 
 @Service
 public class ProductService {
@@ -103,6 +102,36 @@ public class ProductService {
             listId.add(new ObjectId(x));
         }
         return productRepository.findByIdIn(listId);
+    }
+    public List<ResponseKeyWord> finAllCountKeyWord(List<String> ids, String kind){
+        List<ResponseKeyWord> result = new ArrayList<>();
+        for(var x:ids){
+            ResponseKeyWord rs = new ResponseKeyWord();
+            rs.setKeyword(x);
+            rs.setCount(productRepository.countProductByKeywordAndKind(x, kind));
+            result.add(rs);
+        }
+        return  result;
+    }
+    public List<ResponseKeyWord> finAllCountCluster(){
+        List<ResponseKeyWord> result = new ArrayList<>();
+        List<String> ids  =new ArrayList<>();
+        ids.add("vi_tinh");
+        ids.add("chinh_tri_xa_hoi");
+        ids.add("kinh_doanh");
+        ids.add("doi_song");
+        ids.add("van_hoa");
+        ids.add("the_thao");
+        ids.add("phap_luat");
+        ids.add("suc_khoe");
+        ids.add("khoa_hoc ");
+        for(var x:ids){
+            ResponseKeyWord rs = new ResponseKeyWord();
+            rs.setKeyword(x);
+            rs.setCount(productRepository.countProductByClustering(x));
+            result.add(rs);
+        }
+        return  result;
     }
 
     @Transactional

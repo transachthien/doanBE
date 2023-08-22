@@ -3,6 +3,7 @@ package com.example.doan.controller;
 import com.example.doan.model.FormSeachListNew;
 import com.example.doan.model.FormSearch;
 import com.example.doan.model.Product;
+import com.example.doan.model.ResponseKeyWord;
 import com.example.doan.repository.ProductCustomRepository;
 import com.example.doan.repository.ProductRepository;
 import com.example.doan.service.ProductService;
@@ -11,14 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Log4j2
 @RestController
@@ -65,7 +63,7 @@ public class ProductController {
             predict.add("NEG");
 //            predict = "NEG";
         }
-         return productRepository.findAllProduct(keyword, category,predict, paging);
+         return productRepository.findAllProduct(keyword, formSearch.getCategory(),predict, paging);
     }
 //    @GetMapping("/getProductDetail")
 //    public Optional<Product> getProductDetail(@RequestParam int id){
@@ -111,6 +109,22 @@ public class ProductController {
         }
 //        var count = productRepository.countProductByKeywordIsInAndKindAndAndPredictIsIn(keyword, formSearch.getCategory(), predict);
         var count = productCustomRepository.findByCustomQuery(keyword, formSearch.getCategory(), predict);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    @PostMapping("/findTotalNewInKeyWord")
+    public ResponseEntity<List<ResponseKeyWord>> findTotalNewInKeyWord(@RequestBody FormSearch formSearch) {
+        List<String> keyword = new ArrayList<>();
+        if(formSearch.getName().length>0){
+            for(var key: formSearch.getName()){
+                keyword.add(productService.convertStringToId(key));
+            }
+        }
+        var count = productService.finAllCountKeyWord(keyword, formSearch.getCategory());
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    @GetMapping("/findTotalNewInCluster")
+    public ResponseEntity<List<ResponseKeyWord>> findTotalNewInCluster() {
+        var count = productService.finAllCountCluster();
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 //    @PostMapping("/add")
