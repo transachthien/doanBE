@@ -1,5 +1,6 @@
 package com.example.doan.controller;
 
+import com.example.doan.aop.CheckLog;
 import com.example.doan.model.FormSeachListNew;
 import com.example.doan.model.FormSearch;
 import com.example.doan.model.Product;
@@ -75,8 +76,10 @@ public class ProductController {
 //                productService.addProduct(product);
         return new ResponseEntity<>(newEmployee, HttpStatus.OK);
     }
+    @CheckLog(value ="check")
     @GetMapping("/all")
     public ResponseEntity<List<Product>> getAllProduct(){
+        System.out.println("choiwwww");
         List<Product> employees = productService.findAllProduct();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
